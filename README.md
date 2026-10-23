@@ -2,6 +2,14 @@
 
 A modern library operations dashboard built with **MongoDB, Express, React, and Node.js**. Includes book circulation tracking, 15-day return reminders by email, seat occupancy, library events, staff directory, important resources, and college website directory.
 
+<p align="center">
+  <img src="Dashboard.png" alt="LibraryNexus Dashboard Preview" width="900">
+</p>
+
+<p align="center">
+  <em>LibraryNexus — Library management made simpler.</em>
+</p>
+
 ## Features
 - **Circulation:** track which student has which book, issue date, due date, days remaining, and return status.
 - **Email reminders:** daily scheduler emails students when a book is due soon or overdue. The default loan period is 15 days.
