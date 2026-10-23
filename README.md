@@ -75,6 +75,7 @@ This is a starter project, not a fully hardened institutional deployment. Before
 
 ## License
 MIT — see [LICENSE](LICENSE).
+<<<<<<< HEAD
 
 
 ## QR / barcode scanner desk
@@ -99,3 +100,5 @@ For a real library, give **each physical copy its own unique barcode**. The star
 
 ### MongoDB connection troubleshooting
 If the backend reports `ECONNREFUSED 127.0.0.1:27017`, MongoDB is not listening on the configured local port. Check `mongod --version` and `sudo systemctl status mongod`, then start the service if installed with `sudo systemctl enable --now mongod`. On Ubuntu 24.04, use the current official MongoDB installation guide for a supported version: https://www.mongodb.com/docs/v8.0/tutorial/install-mongodb-on-ubuntu/ . Alternatively configure `MONGODB_URI` in `server/.env` to point to a reachable MongoDB deployment.
+=======
+>>>>>>> origin/main

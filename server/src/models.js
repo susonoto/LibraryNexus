@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const bookSchema = new mongoose.Schema({
+<<<<<<< HEAD
   title: { type: String, required: true }, author: String, isbn: String, barcode: { type: String, unique: true, sparse: true },
   category: String, copies: { type: Number, default: 1 }, available: { type: Number, default: 1 }
 }, { timestamps: true });
@@ -10,6 +11,12 @@ const studentSchema = new mongoose.Schema({
   email: { type: String, required: true }, cardCode: { type: String, unique: true, sparse: true }, department: String
 }, { timestamps: true });
 
+=======
+  title: { type: String, required: true }, author: String, isbn: String,
+  category: String, copies: { type: Number, default: 1 }, available: { type: Number, default: 1 }
+}, { timestamps: true });
+
+>>>>>>> origin/main
 const loanSchema = new mongoose.Schema({
   studentName: { type: String, required: true }, studentId: String,
   email: { type: String, required: true }, book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
@@ -37,7 +44,10 @@ const linkSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export const Book = mongoose.model('Book', bookSchema);
+<<<<<<< HEAD
 export const Student = mongoose.model('Student', studentSchema);
+=======
+>>>>>>> origin/main
 export const Loan = mongoose.model('Loan', loanSchema);
 export const Seat = mongoose.model('Seat', seatSchema);
 export const Event = mongoose.model('Event', eventSchema);
