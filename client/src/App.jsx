@@ -1,10 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-<<<<<<< HEAD
   LayoutDashboard, BookOpen, Users, Armchair, CalendarDays, Link2, Globe2, Search, ScanLine, Barcode, Camera,
-=======
-  LayoutDashboard, BookOpen, Users, Armchair, CalendarDays, Link2, Globe2, Search,
->>>>>>> origin/main
   Bell, Moon, Sun, ChevronDown, ArrowUpRight, Clock3, CheckCircle2, AlertCircle,
   LibraryBig, Plus, Mail, GraduationCap, MapPin, CalendarClock, ExternalLink,
   Menu, X, BookMarked, CircleHelp, Settings2, MoreHorizontal, Filter, ArrowRight,
@@ -64,11 +60,7 @@ const demoWebsites = [
  { _id:'w4',title:'Examination Portal',url:'https://example.edu/exams',category:'Academic',description:'Examination notices and results' }
 ];
 const nav = [
-<<<<<<< HEAD
  ['Overview',LayoutDashboard],['Scanner desk',ScanLine],['Circulation',BookOpen],['Seat occupancy',Armchair],
-=======
- ['Overview',LayoutDashboard],['Circulation',BookOpen],['Seat occupancy',Armchair],
->>>>>>> origin/main
  ['Events',CalendarDays],['Staff directory',Users],['Resources',Link2],['College websites',Globe2]
 ];
 const fmt = date => date ? new Date(date).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
@@ -129,10 +121,7 @@ function App(){
    <header className="topbar"><button className="icon-btn mobile-menu" onClick={()=>setMobile(true)}><Menu size={20}/></button><div className="breadcrumb">Workspace <span>/</span> <b>{page}</b></div><div className="top-actions"><label className="search-box"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search anything..." /><kbd>⌘ K</kbd></label><button className="icon-btn theme-toggle" title="Toggle theme" onClick={()=>setDark(!dark)}>{dark?<Sun size={18}/>:<Moon size={18}/>}</button><button className="icon-btn notification-btn" onClick={()=>setPage('Circulation')} title="Due reminders"><Bell size={18}/>{dueSoon.length>0&&<i/>}</button><div className="top-avatar">LA</div></div></header>
    <div className="page-content">
     {page==='Overview'&&<Overview data={data} stats={stats} activeLoans={activeLoans} dueSoon={dueSoon} setPage={setPage} setModal={setModal} returnBook={returnBook} sendReminders={sendReminders}/>}
-<<<<<<< HEAD
     {page==='Scanner desk'&&<ScannerDesk books={data.books} setData={setData} setToast={setToast} connected={connected}/>}
-=======
->>>>>>> origin/main
     {page==='Circulation'&&<Circulation loans={search(data.loans)} books={data.books} setModal={setModal} returnBook={returnBook} sendReminders={sendReminders}/>}
     {page==='Seat occupancy'&&<Seats seats={search(data.seats)} setModal={setModal}/>}
     {page==='Events'&&<Events events={search(data.events)} setModal={setModal}/>}
@@ -147,7 +136,6 @@ function App(){
  </div>
 }
 
-<<<<<<< HEAD
 function ScannerDesk({books,setData,setToast,connected}){
  const [mode,setMode]=useState('issue'),[bookCode,setBookCode]=useState(''),[studentCode,setStudentCode]=useState(''),[manual,setManual]=useState(''),[cameraOn,setCameraOn]=useState(false),[busy,setBusy]=useState(false),[result,setResult]=useState('');
  const videoRef=React.useRef(null), controlsRef=React.useRef(null), lastScanRef=React.useRef(''), bookCodeRef=React.useRef(''), studentCodeRef=React.useRef(''), modeRef=React.useRef('issue');
@@ -170,8 +158,6 @@ function ScannerDesk({books,setData,setToast,connected}){
  return <><PageHeading eyebrow="FAST CIRCULATION · QR / BARCODE" title="Scanner desk" subtitle="Scan book labels, student library cards, and seat codes. USB scanners that type into a field are supported too."/><div className="scan-layout"><section className="panel scan-panel"><div className="section-title"><div><h3><ScanLine size={17}/> Scan workflow</h3><p>Choose what the next scan should do</p></div><Badge type={connected?'success':'warning'}>{connected?'API connected':'Preview / offline'}</Badge></div><div className="scan-modes">{[['issue','Issue book'],['return','Return book'],['register','Add book'],['student','Register student'],['seat','Seat check-in/out']].map(([key,label])=><button key={key} className={mode===key?'selected':''} onClick={()=>{stopCamera();modeRef.current=key;setMode(key);clear()}}>{key==='issue'?<BookOpen size={17}/>:key==='return'?<RotateCcw size={17}/>:key==='register'?<Barcode size={17}/>:key==='student'?<GraduationCap size={17}/>:<Armchair size={17}/>}<span>{label}</span></button>)}</div><div className="scanner-preview">{cameraOn?<video ref={videoRef} autoPlay muted playsInline/>:<div className="scanner-placeholder"><div><Camera size={28}/></div><b>Camera scanner</b><span>Use a webcam or a phone camera to read QR codes and supported barcodes.</span></div>}</div><div className="scan-actions"><button className="primary-btn" onClick={cameraOn?stopCamera:startCamera}>{cameraOn?<X size={16}/>:<Camera size={16}/>} {cameraOn?'Stop camera':'Start camera'}</button><span className="muted-small">Camera access usually requires localhost or HTTPS.</span></div><form className="manual-scan" onSubmit={e=>{e.preventDefault();handleCode(manual);setManual('')}}><label htmlFor="manual-scan-code">Manual entry / USB scanner</label><div><input id="manual-scan-code" autoComplete="off" value={manual} onChange={e=>setManual(e.target.value)} placeholder="Scan or type code, then press Enter"/><button className="secondary-btn" type="submit"><ScanLine size={15}/> Use code</button></div></form></section><section className="panel scan-panel scan-task"><div className="section-title"><div><h3><Barcode size={17}/> Transaction details</h3><p>{mode==='issue'?'Scan book first, then scan the student card.':mode==='return'?'Scan the book being returned.':mode==='register'?'Scan a new label, then enter book metadata.':mode==='student'?'Scan the student library card, then register their details.':'Scan the seat label to toggle occupancy.'}</p></div></div>{mode==='register'?<div className="scan-book-form"><label>Scanned barcode / QR value<input value={bookCode} onChange={e=>setBookCode(e.target.value)} placeholder="Scan a label"/></label><label>Book title<input id="scan-book-title" placeholder="e.g. Database System Concepts"/></label><label>Author<input id="scan-book-author" placeholder="Author name"/></label><label>ISBN<input id="scan-book-isbn" placeholder="ISBN (optional)"/></label><label>Category<input id="scan-book-category" placeholder="Computer Science"/></label><label>Copies<input id="scan-book-copies" type="number" min="1" defaultValue="1"/></label></div>:mode==='student'?<div className="scan-book-form"><label>Scanned library card code<input value={bookCode} onChange={e=>setBookCode(e.target.value)} placeholder="Scan student card"/></label><label>Student name<input id="scan-student-name" placeholder="Full name"/></label><label>Student ID / roll number<input id="scan-student-id" placeholder="e.g. CS2026-014"/></label><label>Email address<input id="scan-student-email" type="email" placeholder="student@college.edu"/></label><label>Department<input id="scan-student-department" placeholder="Department"/></label></div>:<div className="scan-fields"><div><span>{mode==='seat'?'SEAT CODE':'BOOK CODE'}</span><b>{bookCode||'Awaiting scan…'}</b></div>{mode==='issue'&&<div><span>STUDENT CARD CODE</span><b>{studentCode||'Awaiting second scan…'}</b></div>}{mode==='return'&&<p className="muted-small">The system returns the oldest active loan for this book code. If you label every physical copy uniquely, each copy can be tracked independently.</p>}</div>}{result&&<div className={`scan-result ${/success|issued|returned|available|occupied/i.test(result)?'ok':''}`}>{result}</div>}<div className="scan-submit-row"><button className="secondary-btn" onClick={clear} type="button">Clear scans</button><button className="primary-btn" disabled={busy||!bookCode||(mode==='issue'&&!studentCode)} onClick={submit}>{busy?'Working…':mode==='issue'?'Confirm issue':mode==='return'?'Confirm return':mode==='register'?'Save book':'Confirm seat scan'} <ArrowRight size={16}/></button></div><div className="scan-policy"><CheckCircle2 size={16}/><span>Book issue dates and 15-day due dates are generated by the server. Student card codes must be registered before issue transactions.</span></div></section></div><section className="panel scan-inventory"><div className="section-title"><div><h3>Book inventory labels</h3><p>Example scan values available in seeded demo data</p></div><span className="result-count">{books.length} titles</span></div><div className="table-wrap"><table><thead><tr><th>BOOK</th><th>ISBN</th><th>BARCODE / QR VALUE</th><th>AVAILABLE</th></tr></thead><tbody>{books.map(b=><tr key={b._id}><td><b>{b.title}</b><small className="scan-table-sub">{b.author}</small></td><td>{b.isbn||'—'}</td><td><code>{b.barcode||b.isbn||'No code assigned'}</code></td><td>{b.available??'—'} / {b.copies??1}</td></tr>)}</tbody></table></div><p className="muted-small">For production, assign a unique barcode to each physical copy (for example, BK-000123-01), not just to a title. Print labels and attach them to the books.</p></section></>;
 }
 
-=======
->>>>>>> origin/main
 function PageHeading({eyebrow,title,subtitle,action,icon:Icon=Sparkles}){return <div className="page-heading"><div><div className="eyebrow"><span></span>{eyebrow}</div><h1>{title}</h1><p>{subtitle}</p></div>{action&&<button className="primary-btn" onClick={action.onClick}><Plus size={17}/>{action.label}</button>}</div>}
 function SectionTitle({title,subtitle,action}){return <div className="section-title"><div><h3>{title}</h3>{subtitle&&<p>{subtitle}</p>}</div>{action}</div>}
 function Badge({children,type='neutral'}){return <span className={`badge ${type}`}>{children}</span>}
@@ -211,11 +197,7 @@ function Modal({modal,onClose,onSave,books}){const [form,setForm]=useState({});c
  staff:[['name','Full name','text'],['role','Role / position','text'],['department','Department','text'],['email','Work email','email'],['phone','Phone number','text'],['officeHours','Office hours','text']],
  resources:[['title','Resource name','text'],['url','URL','url'],['category','Category','text'],['description','Description','textarea']],
  websites:[['title','Website name','text'],['url','Website URL','url'],['category','Category','text'],['description','Description','textarea']],
-<<<<<<< HEAD
  books:[['title','Book title','text'],['author','Author','text'],['isbn','ISBN','text'],['barcode','Book QR/barcode value','text'],['category','Category','text'],['copies','Number of copies','number']]
-=======
- books:[['title','Book title','text'],['author','Author','text'],['isbn','ISBN','text'],['category','Category','text'],['copies','Number of copies','number']]
->>>>>>> origin/main
  };
  const fs=fields[modal.kind]||[];
  const submit=e=>{e.preventDefault();const payload={...form};if(modal.kind==='books'){payload.copies=Number(payload.copies||1);payload.available=payload.copies}if(modal.kind==='loans'&&payload.issueDate){payload.issueDate=new Date(payload.issueDate).toISOString()}if(modal.kind==='seats'){if(payload.startAt)payload.startAt=new Date(payload.startAt).toISOString();if(payload.endAt)payload.endAt=new Date(payload.endAt).toISOString();if(payload.status==='Occupied'&&!payload.startAt)payload.startAt=new Date().toISOString()}if(modal.kind==='events'&&payload.date)payload.date=new Date(payload.date).toISOString();onSave(modal.kind,payload)};
