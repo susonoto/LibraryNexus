@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
-<<<<<<< HEAD
 import { Book, Loan, Seat, Event, Staff, Resource, Website, Student } from './models.js';
 
 await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/librarynexus');
@@ -17,18 +16,6 @@ await Student.insertMany([
  { name: 'Meera Patel', studentId: 'CS2026-031', email: 'meera@example.edu', cardCode: 'CARD-CS2026-031', department: 'Computer Science' },
  { name: 'Rohan Das', studentId: 'IT2026-008', email: 'rohan@example.edu', cardCode: 'CARD-IT2026-008', department: 'Information Technology' },
  { name: 'Ishita Verma', studentId: 'EC2026-022', email: 'ishita@example.edu', cardCode: 'CARD-EC2026-022', department: 'Electronics' }
-=======
-import { Book, Loan, Seat, Event, Staff, Resource, Website } from './models.js';
-
-await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/librarynexus');
-await Promise.all([Book, Loan, Seat, Event, Staff, Resource, Website].map(M => M.deleteMany({})));
-const books = await Book.insertMany([
- { title: 'Atomic Habits', author: 'James Clear', isbn: '9780735211292', category: 'Personal Development', copies: 5, available: 4 },
- { title: 'Clean Code', author: 'Robert C. Martin', isbn: '9780132350884', category: 'Computer Science', copies: 4, available: 3 },
- { title: 'The Pragmatic Programmer', author: 'David Thomas & Andrew Hunt', isbn: '9780135957059', category: 'Computer Science', copies: 3, available: 3 },
- { title: 'Introduction to Algorithms', author: 'Cormen et al.', isbn: '9780262046305', category: 'Computer Science', copies: 6, available: 5 },
- { title: 'Deep Learning', author: 'Goodfellow et al.', isbn: '9780262035613', category: 'AI & Data Science', copies: 2, available: 2 }
->>>>>>> origin/main
 ]);
 const issue = new Date(); issue.setDate(issue.getDate() - 12);
 const due = new Date(issue); due.setDate(due.getDate() + 15);

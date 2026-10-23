@@ -3,11 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import cron from 'node-cron';
-<<<<<<< HEAD
 import { Book, Loan, Seat, Event, Staff, Resource, Website, Student } from './models.js';
-=======
-import { Book, Loan, Seat, Event, Staff, Resource, Website } from './models.js';
->>>>>>> origin/main
 import { sendDueReminders } from './reminders.js';
 
 const app = express();
@@ -15,7 +11,6 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
 app.use(express.json());
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'LibraryNexus API' }));
-<<<<<<< HEAD
 app.get('/api/students', async (_req, res, next) => { try { res.json(await Student.find().sort({ name: 1 })); } catch(e) { next(e); } });
 app.post('/api/students', async (req, res, next) => { try { res.status(201).json(await Student.create(req.body)); } catch(e) { next(e); } });
 app.get('/api/books', async (_req, res, next) => { try { res.json(await Book.find().sort({ title: 1 })); } catch(e) { next(e); } });
@@ -63,10 +58,6 @@ app.post('/api/scan/seat', async (req, res, next) => {
   } catch(e) { next(e); }
 });
 
-=======
-app.get('/api/books', async (_req, res, next) => { try { res.json(await Book.find().sort({ title: 1 })); } catch(e) { next(e); } });
-app.post('/api/books', async (req, res, next) => { try { res.status(201).json(await Book.create(req.body)); } catch(e) { next(e); } });
->>>>>>> origin/main
 app.get('/api/loans', async (_req, res, next) => { try { res.json(await Loan.find().populate('book').sort({ createdAt: -1 })); } catch(e) { next(e); } });
 app.post('/api/loans', async (req, res, next) => {
   try {
